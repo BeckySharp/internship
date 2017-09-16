@@ -13,6 +13,8 @@ import scala.collection.mutable.ArrayBuffer
 object CreateAntonymSet extends App {
 
   val processor = new FastNLPProcessor()
+  val pattern = "\\(A\\)(.+)\\(B\\)(.+)\\(C\\)(.+)\\(D\\)(.+)".r
+  val no_d_pattern = "\\(A\\)(.+)\\(B\\)(.+)\\(C\\)(.+)".r
 
   def parseQuestionsFile(filename: String): Seq[Document] = {
     val source = scala.io.Source.fromFile(filename)
@@ -28,6 +30,7 @@ object CreateAntonymSet extends App {
 
     documents
   }
+
 
   def parseAntonymFile(filename: String): Map[String, mutable.Set[String]] = {
     val antonyms = new mutable.HashMap[String, mutable.Set[String]]()
